@@ -543,49 +543,81 @@ namespace MapProHammer
         private static float P(string s, float fb=0f) =>
             float.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out float v) ? v : fb;
 
-        private void BtnInfo_Click(object s, RoutedEventArgs e)
-        {
-            var dlg = new Window
-            {
-                Title = "Info",
-                Width = 360, Height = 200,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                Owner = this,
-                ResizeMode = ResizeMode.NoResize,
-                Background = new SolidColorBrush(Color.FromRgb(30,30,30))
-            };
-            var sp = new StackPanel { Margin = new Thickness(24) };
-            sp.Children.Add(new TextBlock
-            {
-                Text = "Hall of Fame",
-                FontSize = 16,
-                FontWeight = FontWeights.Bold,
-                Foreground = new SolidColorBrush(Color.FromRgb(100,170,255)),
-                Margin = new Thickness(0,0,0,12)
-            });
-            sp.Children.Add(new TextBlock
-            {
-                Text = "@Catir1337 aka Уехал на остров! aka Станислав Абдулов",
-                Foreground = Brushes.White,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0,0,0,8)
-            });
-            var link = new System.Windows.Documents.Hyperlink(
-                new System.Windows.Documents.Run("https://github.com/catir1337"))
-            {
-                NavigateUri = new Uri("https://github.com/catir1337")
-            };
-            link.RequestNavigate += (_, ev) =>
-            {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    { FileName = ev.Uri.AbsoluteUri, UseShellExecute = true });
-            };
-            var tb = new TextBlock { Foreground = Brushes.CornflowerBlue };
-            tb.Inlines.Add(link);
-            sp.Children.Add(tb);
-            dlg.Content = sp;
-            dlg.ShowDialog();
-        }
+ private void BtnInfo_Click(object s, RoutedEventArgs e)
+{
+    var dlg = new Window
+    {
+        Title = "О программе",
+        Width = 420, 
+        Height = 320,
+        WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        Owner = this,
+        ResizeMode = ResizeMode.NoResize,
+        Background = new SolidColorBrush(Color.FromRgb(30, 30, 30))
+    };
+
+    var sp = new StackPanel { Margin = new Thickness(24) };
+
+
+    sp.Children.Add(new TextBlock
+    {
+        Text = "MapProHammer",
+        FontSize = 18,
+        FontWeight = FontWeights.Bold,
+        Foreground = new SolidColorBrush(Color.FromRgb(100, 170, 255)),
+        Margin = new Thickness(0, 0, 0, 8)
+    });
+
+
+    sp.Children.Add(new TextBlock
+    {
+        Text = "© 2026 Catir1337 (Станислав Абдулов)",
+        Foreground = Brushes.White,
+        Margin = new Thickness(0, 0, 0, 12)
+    });
+
+
+    sp.Children.Add(new TextBlock
+    {
+        Text = "Лицензия: GNU General Public License v3.0",
+        Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 200)),
+        FontSize = 12,
+        Margin = new Thickness(0, 0, 0, 12)
+    });
+
+
+    var linkProfile = new System.Windows.Documents.Hyperlink(
+        new System.Windows.Documents.Run("GitHub: catir1337"))
+    {
+        NavigateUri = new Uri("https://github.com/catir1337")
+    };
+    linkProfile.RequestNavigate += (_, ev) =>
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            { FileName = ev.Uri.AbsoluteUri, UseShellExecute = true });
+    };
+    var tbProfile = new TextBlock { Foreground = Brushes.CornflowerBlue, Margin = new Thickness(0, 0, 0, 4) };
+    tbProfile.Inlines.Add(linkProfile);
+    sp.Children.Add(tbProfile);
+
+
+    var linkRepo = new System.Windows.Documents.Hyperlink(
+        new System.Windows.Documents.Run("Исходный код: https://github.com/catir1337/MapProHammer"))
+    {
+        NavigateUri = new Uri("https://github.com/catir1337/MapProHammer")
+    };
+    linkRepo.RequestNavigate += (_, ev) =>
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            { FileName = ev.Uri.AbsoluteUri, UseShellExecute = true });
+    };
+    var tbRepo = new TextBlock { Foreground = Brushes.CornflowerBlue };
+    tbRepo.Inlines.Add(linkRepo);
+    sp.Children.Add(tbRepo);
+
+    dlg.Content = sp;
+    dlg.ShowDialog();
+}
 
         private void BtnAddType_Click(object s, RoutedEventArgs e)
         {
