@@ -10,6 +10,10 @@
     <RootNamespace>MapProHammer</RootNamespace>
     <ApplicationIcon />
     <StartupObject />
+    
+
+    <Copyright>Copyright (c) 2026 Catir1337</Copyright>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
