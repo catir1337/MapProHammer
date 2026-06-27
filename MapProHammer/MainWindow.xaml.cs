@@ -35,7 +35,7 @@ namespace MapProHammer
 
         private readonly DrawingVisual _dv = new();
 
-        // ★ Ссылка на 3D-окно (null, если закрыто)
+
         private View3DWindow? _view3D;
 
         private static readonly Dictionary<ObjectKind, (Color dot, Color border)> KC = new()
@@ -92,7 +92,7 @@ namespace MapProHammer
                 BtnSave.IsEnabled = BtnSaveAs.IsEnabled = true;
                 BtnAddType.IsEnabled = true;
                 BtnDeleteType.IsEnabled = true;
-                BtnView3D.IsEnabled = true;   // ★ разблокировать кнопку 3D
+                BtnView3D.IsEnabled = true;   
                 PopulateList(_filtered);
                 FitViewport();
                 Redraw();
