@@ -571,7 +571,7 @@ namespace MapProHammer
 
     sp.Children.Add(new TextBlock
     {
-        Text = "© 2026 Catir1337 (Станислав Абдулов)",
+        Text = "© 2026 Catir1337",
         Foreground = Brushes.White,
         Margin = new Thickness(0, 0, 0, 12)
     });
