@@ -1,0 +1,171 @@
+<Window x:Class="MapProHammer.Views.ObjectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Объект"
+        Width="440" Height="610"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#1e1e1e">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background"  Value="#3c3c3c"/>
+            <Setter Property="Foreground"  Value="#ccc"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+            <Setter Property="Padding"     Value="4,3"/>
+            <Setter Property="Margin"      Value="0,2,0,6"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#aaa"/>
+            <Setter Property="Padding"    Value="0,4,0,0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background"  Value="#3c3c3c"/>
+            <Setter Property="Foreground"  Value="#ccc"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+            <Setter Property="Padding"     Value="14,5"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background"  Value="#3c3c3c"/>
+            <Setter Property="Foreground"  Value="#ccc"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+            <Setter Property="Padding"     Value="4,3"/>
+            <Setter Property="Margin"      Value="0,2,0,6"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#ccc"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Margin="16">
+
+        <!-- OK / Cancel -->
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="Отмена" Click="BtnCancel_Click" Margin="0,0,8,0"/>
+            <Button x:Name="BtnOK" Content="OK" Click="BtnOK_Click"
+                    Background="#094771" Foreground="White" BorderBrush="#1177bb"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- Тип объекта -->
+                <TextBlock Text="Тип объекта (ObjType)" Foreground="#888" FontSize="11" Margin="0,0,0,2"/>
+
+                <!-- Поиск с placeholder -->
+                <Grid Margin="0,0,0,4">
+                    <TextBox x:Name="TxtTypeSearch"
+                             TextChanged="TxtTypeSearch_TextChanged"
+                             Margin="0"/>
+                    <TextBlock Text="Поиск по названию…"
+                               Foreground="#555" FontStyle="Italic"
+                               Margin="6,5,0,0" IsHitTestVisible="False">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=TxtTypeSearch}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Отсортированный список типов -->
+                <ListBox x:Name="ListTypes"
+                         Height="160"
+                         SelectionChanged="ListTypes_SelectionChanged"
+                         Background="#252526" Foreground="#ccc"
+                         BorderBrush="#444" BorderThickness="1"
+                         Margin="0,0,0,4"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="6,3"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#094771"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#2a2d2e"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <TextBlock x:Name="TxtTypePath" FontSize="10" Foreground="#666"
+                           TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                <Separator Background="#333" Margin="0,4,0,8"/>
+
+                <!-- Позиция -->
+                <TextBlock Text="Позиция" Foreground="#888" FontSize="11"/>
+                <Grid Margin="0,2,0,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="X" Foreground="#e07070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="1" x:Name="TbX" Text="0"/>
+                    <TextBlock Grid.Column="3" Text="Y" Foreground="#70e070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="4" x:Name="TbY" Text="0"/>
+                    <TextBlock Grid.Column="6" Text="Z" Foreground="#7070e0" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="7" x:Name="TbZ" Text="0"/>
+                </Grid>
+
+                <!-- Поворот -->
+                <TextBlock Text="Поворот (Euler)" Foreground="#888" FontSize="11"/>
+                <Grid Margin="0,2,0,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="X" Foreground="#e07070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="1" x:Name="TbRX" Text="0"/>
+                    <TextBlock Grid.Column="3" Text="Y" Foreground="#70e070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="4" x:Name="TbRY" Text="0"/>
+                    <TextBlock Grid.Column="6" Text="Z" Foreground="#7070e0" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="7" x:Name="TbRZ" Text="0"/>
+                </Grid>
+
+                <!-- Масштаб -->
+                <TextBlock Text="Масштаб" Foreground="#888" FontSize="11"/>
+                <Grid Margin="0,2,0,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="X" Foreground="#e07070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="1" x:Name="TbSX" Text="1"/>
+                    <TextBlock Grid.Column="3" Text="Y" Foreground="#70e070" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="4" x:Name="TbSY" Text="1"/>
+                    <TextBlock Grid.Column="6" Text="Z" Foreground="#7070e0" VerticalAlignment="Center"/>
+                    <TextBox   Grid.Column="7" x:Name="TbSZ" Text="1"/>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
