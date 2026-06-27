@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Catir1337
+// SPDX-License-Identifier: GPL-3.0-only
 using System.Collections.Generic;
 
 namespace MapProHammer.IO
